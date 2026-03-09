@@ -3,7 +3,7 @@ import 'package:flutter_extension/views/screen/auth/check_email_screen.dart';
 import 'package:flutter_extension/views/screen/auth/create_account_screen.dart';
 import 'package:flutter_extension/views/screen/auth/forgot_password_screen.dart';
 import 'package:flutter_extension/views/screen/auth/sign_in_screen.dart';
-import 'package:flutter_extension/views/screen/home/home_screen.dart';
+import 'package:flutter_extension/views/screen/main_screen.dart';
 import 'package:flutter_extension/views/screen/onboarding/onboarding_screen.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +17,7 @@ class AppRoutes {
   static String createAccountScreen = "/create_account_screen";
   static String forgotPasswordScreen = "/forgot_password_screen";
   static String checkEmailScreen = "/check_email_screen";
-  static String homeScreen = "/home_screen";
+  static String homeScreen = "/main_screen";
 
   static List<GetPage> page = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -30,6 +30,6 @@ class AppRoutes {
       page: () => const ForgotPasswordScreen(),
     ),
     GetPage(name: checkEmailScreen, page: () => const CheckEmailScreen()),
-    GetPage(name: homeScreen, page: () => const HomeScreen()),
+    GetPage(name: homeScreen, page: () => const MainScreen()),
   ];
 }

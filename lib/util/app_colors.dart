@@ -2,26 +2,46 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-class AppColors{
-  
-  static Color primaryColor=const Color(0xFF2683EB);
-  static Color backgroundColor=const Color(0xFF010101);
-  static Color cardColor = const Color(0xFF2F2F2F);
-  static Color cardLightColor = const Color(0xFF555555);
-  static Color borderColor = const Color(0xFF2683EB);
-  static Color textColor = const Color(0xFFFFFFFF);
-  static Color subTextColor = const Color(0xFFE8E8E8);
-  static Color hintColor = const Color(0xFFB5B5B5);
-  static Color greyColor = const Color(0xFFB5B5B5);
-  static Color fillColor = const Color(0xFFE9F3FD).withOpacity(0.3);
-  static Color dividerColor = const Color(0xFF555555);
-  static Color shadowColor = const Color(0xFF2B2A2A);
-  static Color bottomBarColor = const Color(0xFF343434);
+import 'package:flutter/material.dart';
 
-  static BoxShadow shadow=BoxShadow(
-    blurRadius: 4,
+class AppColors {
+  static const Color primaryTeal = Color(0xFF24A79E);
+  static const Color primarySky = Color(0xFF1B59A6);
+  static const Color backgroundLight = Color(0xFFF8FAFC);
+  static const Color darkNavy = Color(0xFF0F172A);
+  static const Color slate800 = Color(0xFF1E293B);
+  static const Color slate500 = Color(0xFF64748B);
+  static const Color green500 = Color(0xFF22C55E);
+  static const Color blue500 = Color(0xFF3B82F6);
+  static const Color amber500 = Color(0xFFF59E0B);
+  static const Color red500 = Color(0xFFEF4444);
+
+  static const LinearGradient primaryGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [primaryTeal, primarySky],
+  );
+
+  static Color primaryColor = primaryTeal;
+  static Color markedSecondaryColor = primarySky;
+  static Color accentColor = slate500;
+  static Color deepAccentColor = slate800;
+  static Color backgroundColor = backgroundLight;
+  static Color cardColor = Colors.white;
+  static Color cardLightColor = const Color(0xFFF1F5F9);
+  static Color borderColor = const Color(0xFFE2E8F0);
+  static Color textColor = slate800;
+  static Color subTextColor = slate500;
+  static Color hintColor = const Color(0xFF94A3B8);
+  static Color greyColor = const Color(0xFFCBD5E1);
+  static Color fillColor = const Color(0xFFF1F5F9);
+  static Color dividerColor = const Color(0xFFE2E8F0);
+  static Color shadowColor = const Color(0x0F000000);
+
+  static BoxShadow shadow = BoxShadow(
+    blurRadius: 10,
     spreadRadius: 0,
     color: shadowColor,
-    offset: const Offset(0, 2),
+    offset: const Offset(0, 4),
   );
 }

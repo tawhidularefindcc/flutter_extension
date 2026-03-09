@@ -64,7 +64,7 @@ class OnboardingController extends GetxController {
   Future<void> nextPage() async {
     final int lastPage = onboardingItems.length - 1;
     if (_currentPage >= lastPage) {
-      Get.offNamed(AppRoutes.authWelcomeScreen);
+      Get.offNamed(AppRoutes.homeScreen);
       return;
     }
 
@@ -75,7 +75,7 @@ class OnboardingController extends GetxController {
   }
 
   void skip() {
-    Get.offNamed(AppRoutes.authWelcomeScreen);
+    Get.offNamed(AppRoutes.homeScreen);
   }
 
   @override

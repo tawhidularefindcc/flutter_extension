@@ -18,12 +18,14 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     required this.text,
     this.loading = false,
+    this.enabled = true,
     this.width,
     this.height,
   });
   final Function() onTap;
   final String text;
   final bool loading;
+  final bool enabled;
   final double? height;
   final double? width;
   final Color? color;
@@ -36,7 +38,8 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double buttonRadius = radius ?? 24.r;
+    final bool isInteractive = !loading && enabled;
+    final double buttonRadius = radius ?? 12.r;
     final Size buttonSize = Size(width ?? Get.width, height ?? 53.h);
     final Widget buttonChild = loading
         ? SizedBox(
@@ -70,38 +73,44 @@ class CustomButton extends StatelessWidget {
 
     return Padding(
       padding: margin,
-      child: gradient == null
-          ? ElevatedButton(
-              onPressed: loading ? () {} : onTap,
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(buttonRadius),
-                ),
-                backgroundColor: color ?? AppColors.primaryColor,
-                minimumSize: buttonSize,
-              ),
-              child: buttonChild,
-            )
-          : Container(
-              decoration: BoxDecoration(
-                gradient: gradient,
-                borderRadius: BorderRadius.circular(buttonRadius),
-              ),
-              child: ElevatedButton(
-                onPressed: loading ? () {} : onTap,
+      child: Opacity(
+        opacity: isInteractive ? 1 : 0.6,
+        child: gradient == null
+            ? ElevatedButton(
+                onPressed: isInteractive ? onTap : null,
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(buttonRadius),
                   ),
+                  backgroundColor: color ?? AppColors.primaryColor,
+                  disabledBackgroundColor: (color ?? AppColors.primaryColor)
+                      .withValues(alpha: 0.8),
                   minimumSize: buttonSize,
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  surfaceTintColor: Colors.transparent,
                 ),
                 child: buttonChild,
+              )
+            : Container(
+                decoration: BoxDecoration(
+                  gradient: gradient,
+                  borderRadius: BorderRadius.circular(buttonRadius),
+                ),
+                child: ElevatedButton(
+                  onPressed: isInteractive ? onTap : null,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(buttonRadius),
+                    ),
+                    minimumSize: buttonSize,
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                    disabledBackgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    surfaceTintColor: Colors.transparent,
+                  ),
+                  child: buttonChild,
+                ),
               ),
-            ),
+      ),
     );
   }
 }

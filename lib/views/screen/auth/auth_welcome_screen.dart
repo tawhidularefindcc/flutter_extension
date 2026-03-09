@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_extension/controller/auth_controller.dart';
+import 'package:flutter_extension/util/app_colors.dart';
 import 'package:get/get.dart';
 
 class AuthWelcomeScreen extends StatelessWidget {
@@ -18,11 +19,7 @@ class AuthWelcomeScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(20, 38, 20, 28),
                   decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Color(0xFF1F5CA8), Color(0xFF24B2A9)],
-                    ),
+                    gradient: AppColors.primaryGradient,
                   ),
                   child: Column(
                     children: [
@@ -71,11 +68,7 @@ class AuthWelcomeScreen extends StatelessWidget {
                             vertical: 12,
                           ),
                           decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [Color(0xFF1F5CA8), Color(0xFF24B2A9)],
-                            ),
+                            gradient: AppColors.primaryGradient,
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: InkWell(

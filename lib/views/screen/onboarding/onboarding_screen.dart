@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_extension/controller/onboarding_controller.dart';
 import 'package:flutter_extension/data/model/onboarding_item_model.dart';
+import 'package:flutter_extension/util/app_colors.dart';
 import 'package:flutter_extension/views/base/custom_button.dart';
 import 'package:get/get.dart';
 
@@ -62,11 +63,7 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                     radius: 14,
                     height: 56,
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Color(0xFF1F5CA8), Color(0xFF24B2A9)],
-                    ),
+                    gradient: AppColors.primaryGradient,
                   ),
                   const SizedBox(height: 14),
                   _PageDots(

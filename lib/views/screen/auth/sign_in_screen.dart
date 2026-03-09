@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_extension/controller/auth_controller.dart';
+import 'package:flutter_extension/helper/route_helper.dart';
+import 'package:flutter_extension/util/app_colors.dart';
 import 'package:flutter_extension/views/base/auth_text_field.dart';
 import 'package:flutter_extension/views/base/custom_button.dart';
 import 'package:get/get.dart';
@@ -24,7 +26,7 @@ class SignInScreen extends StatelessWidget {
                     child: Text(
                       'Sign In',
                       style: TextStyle(
-                        fontSize: 76 / 2,
+                        fontSize: 24,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF11131A),
                       ),
@@ -35,7 +37,7 @@ class SignInScreen extends StatelessWidget {
                     child: Text(
                       'Access your saved zones & reports',
                       style: TextStyle(
-                        fontSize: 34 / 2,
+                        fontSize: 16,
                         color: Color(0xFF66779B),
                         fontWeight: FontWeight.w400,
                       ),
@@ -45,7 +47,7 @@ class SignInScreen extends StatelessWidget {
                   const Text(
                     'Email address',
                     style: TextStyle(
-                      fontSize: 18 + 7 / 10,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Color(0xFF172844),
                     ),
@@ -63,7 +65,7 @@ class SignInScreen extends StatelessWidget {
                       const Text(
                         'Password',
                         style: TextStyle(
-                          fontSize: 18 + 7 / 10,
+                          fontSize: 16,
                           fontWeight: FontWeight.w700,
                           color: Color(0xFF172844),
                         ),
@@ -80,7 +82,7 @@ class SignInScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Color(0xFF0A4EA0),
                             fontWeight: FontWeight.w700,
-                            fontSize: 16 + 4 / 10,
+                            fontSize: 14,
                           ),
                         ),
                       ),
@@ -107,13 +109,9 @@ class SignInScreen extends StatelessWidget {
                     text: 'Sign In',
                     radius: 12,
                     height: 56,
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Color(0xFF1F5CA8), Color(0xFF24B2A9)],
-                    ),
+                    gradient: AppColors.primaryGradient,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       const Expanded(
@@ -127,9 +125,9 @@ class SignInScreen extends StatelessWidget {
                         child: Text(
                           'Or',
                           style: TextStyle(
-                            color: const Color(
-                              0xFF6E7E97,
-                            ).withValues(alpha: 0.95),
+                            color: AppColors.accentColor.withValues(
+                              alpha: 0.95,
+                            ),
                             fontSize: 18 + 1 / 10,
                             fontWeight: FontWeight.w500,
                           ),
@@ -143,19 +141,50 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   CustomButton(
                     onTap: controller.continueAsGuest,
                     text: 'Continue as Guest',
                     radius: 12,
                     height: 56,
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Color(0xFF1F5CA8), Color(0xFF24B2A9)],
-                    ),
+                    gradient: AppColors.primaryGradient,
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'No account?',
+                        style: TextStyle(
+                          color: AppColors.deepAccentColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.createAccountScreen,
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          minimumSize: Size.zero,
+                        ),
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: AppColors.markedSecondaryColor,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
