@@ -62,11 +62,11 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
   bool _showCitySearch = false;
   String? _selectedCountry;
   String? _selectedCity;
-  String _selectedBudget = 'EUR5k';
+  String _selectedBudget = 'EUR1k';
   String _selectedSafetyPriority = 'Important';
-  String _selectedSchoolPriority = 'Important';
-  String _selectedTransportPriority = 'Important';
-  String? _selectedCommutePreference;
+  String _selectedSchoolPriority = 'Somewhat';
+  String _selectedTransportPriority = 'Essential';
+  String? _selectedCommutePreference = 'By car';
   String? _selectedVibe;
 
   int get _safeStep {
@@ -121,9 +121,6 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
     if (_safeStep == 1) {
       return _selectedCountry != null && _selectedCity != null;
     }
-    if (_safeStep == 2) {
-      return _selectedBudget.isNotEmpty;
-    }
     return true;
   }
 
@@ -166,7 +163,7 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
     if (_safeStep == 1 && !_canContinue) {
       Get.snackbar(
         'Missing selection',
-        'Please select a country and a city to continue.',
+        'Please select a country and city to continue.',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: const Color(0xFF1A2336),
         colorText: Colors.white,
@@ -188,16 +185,26 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
           selectedVibe: _selectedVibe,
         ),
         preventDuplicates: false,
+        transition: Transition.rightToLeft,
+        duration: const Duration(milliseconds: 260),
       );
       return;
     }
 
-    Get.to(() => const AnalyzingTerritoriesScreen(), preventDuplicates: false);
+    Get.to(
+      () => const AnalyzingTerritoriesScreen(),
+      preventDuplicates: false,
+      transition: Transition.rightToLeft,
+      duration: const Duration(milliseconds: 260),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final _StepMeta meta = _metaForStep(_safeStep);
+    final _StepMeta meta = _metaForStep(
+      _safeStep,
+      hasSelectedCountry: _selectedCountry != null,
+    );
     final double progress = _safeStep / _totalSteps;
 
     return Scaffold(
@@ -330,7 +337,7 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
   Widget _buildStepBody() {
     switch (_safeStep) {
       case 1:
-        return _buildCountryAndCityStep();
+        return _buildLocationStep();
       case 2:
         return BudgetStep(
           selectedBudget: _selectedBudget,
@@ -398,12 +405,12 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
     }
   }
 
-  Widget _buildCountryAndCityStep() {
+  Widget _buildLocationStep() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _SelectionField(
-          value: _selectedCountry ?? 'select A country',
+          value: _selectedCountry ?? 'Select a country...',
           onTap: _openCountrySearch,
         ),
         if (_showCountrySearch) ...[
@@ -416,41 +423,34 @@ class _PreferenceStepScreenState extends State<PreferenceStepScreen> {
             onSelect: _selectCountry,
           ),
         ],
-        const SizedBox(height: 14),
-        const Text(
-          'Select city',
-          style: TextStyle(
-            fontSize: 17,
-            color: Color(0xFF11131A),
-            fontWeight: FontWeight.w700,
+        if (_selectedCountry != null) ...[
+          const SizedBox(height: 14),
+          _SelectionField(
+            value: _selectedCity ?? 'Select a city...',
+            onTap: _openCitySearch,
           ),
-        ),
-        const SizedBox(height: 8),
-        _SelectionField(
-          value: _selectedCity ?? 'select A city',
-          onTap: _openCitySearch,
-        ),
-        if (_showCitySearch) ...[
-          const SizedBox(height: 12),
-          _SearchSuggestionPanel(
-            controller: _citySearchController,
-            hint: 'Search city',
-            suggestions: _filteredCities,
-            onChanged: (_) => setState(() {}),
-            onSelect: _selectCity,
+          if (_showCitySearch) ...[
+            const SizedBox(height: 12),
+            _SearchSuggestionPanel(
+              controller: _citySearchController,
+              hint: 'Search city',
+              suggestions: _filteredCities,
+              onChanged: (_) => setState(() {}),
+              onSelect: _selectCity,
+            ),
+          ],
+          const SizedBox(height: 18),
+          const Text(
+            'Popular cities',
+            style: TextStyle(
+              fontSize: 19.5,
+              color: Color(0xFF11131A),
+              fontWeight: FontWeight.w700,
+            ),
           ),
+          const SizedBox(height: 10),
+          _CityChipRows(selectedCity: _selectedCity, onSelect: _selectCity),
         ],
-        const SizedBox(height: 18),
-        const Text(
-          'Popular cities',
-          style: TextStyle(
-            fontSize: 19.5,
-            color: Color(0xFF11131A),
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 10),
-        _CityChipRows(selectedCity: _selectedCity, onSelect: _selectCity),
       ],
     );
   }
@@ -777,12 +777,21 @@ class _StepMeta {
   final Color iconBackground;
 }
 
-_StepMeta _metaForStep(int step) {
+_StepMeta _metaForStep(int step, {required bool hasSelectedCountry}) {
   switch (step) {
     case 1:
+      if (hasSelectedCountry) {
+        return const _StepMeta(
+          title: 'Which city?',
+          subtitle: 'Search or select your target city in Portugal',
+          icon: Icons.location_on_outlined,
+          iconColor: Color(0xFF1F63B4),
+          iconBackground: Color(0xFFDCE4F0),
+        );
+      }
       return const _StepMeta(
         title: 'Select country',
-        subtitle: 'Choose country and city to explore',
+        subtitle: 'Choose the country you want to explore',
         icon: Icons.public,
         iconColor: Color(0xFF1F63B4),
         iconBackground: Color(0xFFDCE4F0),

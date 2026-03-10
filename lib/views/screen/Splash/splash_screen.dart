@@ -52,10 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Find your ideal neighbourhood in minutes using\nreal territorial data',
+                      'Find your ideal neighbourhood in minutes using real territorial data',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 16,
                         height: 1.2,
                         color: Colors.white,
                         fontWeight: FontWeight.w400,

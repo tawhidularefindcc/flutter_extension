@@ -17,9 +17,9 @@ class AppColors {
   static const Color red500 = Color(0xFFEF4444);
 
   static const LinearGradient primaryGradient = LinearGradient(
-    begin: Alignment.topLeft,
+    begin: Alignment.centerLeft,
     end: Alignment.bottomRight,
-    colors: [primaryTeal, primarySky],
+    colors: [primarySky, primaryTeal],
   );
 
   static Color primaryColor = primaryTeal;

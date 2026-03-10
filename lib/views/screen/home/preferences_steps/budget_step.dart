@@ -39,7 +39,7 @@ class BudgetStep extends StatelessWidget {
           children: [
             Expanded(
               child: StepChoicePill(
-                label: 'EUR500',
+                label: '€500',
                 selected: selectedBudget == 'EUR500',
                 onTap: () => onSelectBudget('EUR500'),
               ),
@@ -47,7 +47,7 @@ class BudgetStep extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: StepChoicePill(
-                label: 'EUR1k',
+                label: '€1k',
                 selected: selectedBudget == 'EUR1k',
                 onTap: () => onSelectBudget('EUR1k'),
               ),
@@ -55,7 +55,7 @@ class BudgetStep extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: StepChoicePill(
-                label: 'EUR5k',
+                label: '€5k',
                 selected: selectedBudget == 'EUR5k',
                 onTap: () => onSelectBudget('EUR5k'),
               ),
@@ -67,7 +67,7 @@ class BudgetStep extends StatelessWidget {
           children: [
             Expanded(
               child: StepChoicePill(
-                label: 'EUR2k',
+                label: '€2k',
                 selected: selectedBudget == 'EUR2k',
                 onTap: () => onSelectBudget('EUR2k'),
               ),
@@ -75,7 +75,7 @@ class BudgetStep extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: StepChoicePill(
-                label: 'EUR8k',
+                label: '€8k',
                 selected: selectedBudget == 'EUR8k',
                 onTap: () => onSelectBudget('EUR8k'),
               ),
@@ -83,7 +83,7 @@ class BudgetStep extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: StepChoicePill(
-                label: 'EUR10k',
+                label: '€10k',
                 selected: selectedBudget == 'EUR10k',
                 onTap: () => onSelectBudget('EUR10k'),
               ),
@@ -98,19 +98,19 @@ class BudgetStep extends StatelessWidget {
 String budgetDisplay(String budget) {
   switch (budget) {
     case 'EUR500':
-      return 'EUR 500';
+      return '€500';
     case 'EUR1k':
-      return 'EUR 1,000';
+      return '€1,000';
     case 'EUR2k':
-      return 'EUR 2,000';
+      return '€2,000';
     case 'EUR5k':
-      return 'EUR 5,000';
+      return '€5,000';
     case 'EUR8k':
-      return 'EUR 8,000';
+      return '€8,000';
     case 'EUR10k':
-      return 'EUR 10,000';
+      return '€10,000';
     default:
-      return 'EUR 5,000';
+      return '€5,000';
   }
 }
 

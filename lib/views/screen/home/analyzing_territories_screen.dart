@@ -31,7 +31,11 @@ class _AnalyzingTerritoriesScreenState extends State<AnalyzingTerritoriesScreen>
         AnimationController(vsync: this, duration: const Duration(seconds: 3))
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed && mounted) {
-              Get.offAll(() => const MainScreen(initialIndex: 0));
+              Get.offAll(
+                () => const MainScreen(initialIndex: 0),
+                transition: Transition.fadeIn,
+                duration: const Duration(milliseconds: 300),
+              );
             }
           })
           ..forward();
@@ -88,7 +92,7 @@ class _AnalyzingTerritoriesScreenState extends State<AnalyzingTerritoriesScreen>
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 34),
               child: Text(
-                'Matching your preferences with official\ndata from selected areas',
+                'Matching your preferences with official data\nfrom Lisbon',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 34 / 2,

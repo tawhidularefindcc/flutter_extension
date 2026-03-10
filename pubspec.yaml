@@ -18,6 +18,8 @@ dependencies:
   flutter_spinkit:
   cached_network_image:
   shimmer: 
+  flutter_map:
+  latlong2:
 
 
 

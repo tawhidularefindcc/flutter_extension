@@ -3,6 +3,7 @@ import 'package:flutter_extension/controller/onboarding_controller.dart';
 import 'package:flutter_extension/data/model/onboarding_item_model.dart';
 import 'package:flutter_extension/util/app_colors.dart';
 import 'package:flutter_extension/views/base/custom_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -117,8 +118,8 @@ class _OnboardingPage extends StatelessWidget {
             Text(
               item.description,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 34 / 2,
+              style: TextStyle(
+                fontSize: 16.sp,
                 height: 1.25,
                 color: Color(0xFF66779B),
                 fontWeight: FontWeight.w400,
@@ -136,10 +137,10 @@ class _OnboardingPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Account benefits',
                     style: TextStyle(
-                      fontSize: 34 / 2,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: Color(0xFF15171D),
                     ),

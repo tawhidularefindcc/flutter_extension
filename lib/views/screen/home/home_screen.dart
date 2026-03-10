@@ -4,6 +4,7 @@ import 'package:flutter_extension/views/screen/news/news_detail_screen.dart';
 import 'package:flutter_extension/views/screen/news/news_feed_screen.dart';
 import 'package:flutter_extension/views/screen/notifications/notifications_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 const String _newsImageUrl =
     'https://upload.wikimedia.org/wikipedia/commons/2/2a/Admiral_Kuznetsov_carrier.jpg';
@@ -36,10 +37,25 @@ const List<_NewsItem> _newsItems = [
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void _openWizard(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const PreferenceStepScreen(step: 1)),
+  Route<void> _slideRoute(Widget page) {
+    return PageRouteBuilder<void>(
+      transitionDuration: const Duration(milliseconds: 260),
+      reverseTransitionDuration: const Duration(milliseconds: 260),
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final Animation<Offset> offsetAnimation = Tween<Offset>(
+          begin: const Offset(1, 0),
+          end: Offset.zero,
+        ).chain(CurveTween(curve: Curves.easeOutCubic)).animate(animation);
+        return SlideTransition(position: offsetAnimation, child: child);
+      },
     );
+  }
+
+  void _openWizard(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(_slideRoute(const PreferenceStepScreen(step: 1)));
   }
 
   @override
@@ -126,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
-                          'English',
+                          'Search ....',
                           style: TextStyle(
                             fontSize: 17.sp,
                             color: const Color(0xFF6D7B96),
@@ -134,10 +150,10 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 23.sp,
-                        color: const Color(0xFF6D7B96),
+                      SvgPicture.asset(
+                        'assets/icons/location.svg',
+                        width: 16.w,
+                        height: 16.w,
                       ),
                     ],
                   ),
@@ -155,26 +171,26 @@ class HomeScreen extends StatelessWidget {
                   _QuickActionCard(
                     title: 'Find Best Areas',
                     subtitle: 'Run recommendation\nwizard',
-                    icon: Icons.location_on_outlined,
+                    icon: 'assets/icons/location.svg',
                     selected: true,
                     onTap: () => _openWizard(context),
                   ),
                   _QuickActionCard(
                     title: 'Compare Zones',
                     subtitle: 'Side-by-side analysis',
-                    icon: Icons.hub_outlined,
+                    icon: 'assets/icons/compare.svg',
                     onTap: () {},
                   ),
                   _QuickActionCard(
                     title: 'Renting Guide',
                     subtitle: 'Legal rights & processes',
-                    icon: Icons.menu_book_outlined,
+                    icon: 'assets/icons/reading.svg',
                     onTap: () {},
                   ),
                   _QuickActionCard(
                     title: 'Compare Zones',
                     subtitle: 'Your zones and reports',
-                    icon: Icons.bookmark_border_rounded,
+                    icon: 'assets/icons/bookmark.svg',
                     onTap: () {},
                   ),
                 ],
@@ -182,12 +198,12 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Migration News',
                     style: TextStyle(
-                      fontSize: 22 / 1.95,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF11131A),
+                      color: const Color(0xFF11131A),
                     ),
                   ),
                   const Spacer(),
@@ -379,7 +395,7 @@ class _QuickActionCard extends StatelessWidget {
 
   final String title;
   final String subtitle;
-  final IconData icon;
+  final String icon;
   final VoidCallback onTap;
   final bool selected;
 
@@ -409,9 +425,10 @@ class _QuickActionCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.r),
               ),
               alignment: Alignment.center,
-              child: Icon(
+              child: SvgPicture.asset(
                 icon,
-                size: 22.sp,
+                width: 22.w,
+                height: 22.w,
                 color: selected ? Colors.white : const Color(0xFF2C67B9),
               ),
             ),
@@ -484,7 +501,7 @@ class _NewsCard extends StatelessWidget {
             Text(
               item.country,
               style: TextStyle(
-                fontSize: 17 / 2,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
                 color: const Color(0xFF5E6781),
               ),
@@ -495,7 +512,7 @@ class _NewsCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 22 / 2,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
                 color: const Color(0xFF11131A),
                 height: 1.18,
@@ -507,7 +524,7 @@ class _NewsCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 16.5 / 2,
+                fontSize: 12.sp,
                 color: const Color(0xFF7180A0),
                 height: 1.25,
               ),
@@ -541,7 +558,7 @@ class _NewsCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 17 / 2,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w700,
                       color: const Color(0xFF4C4F67),
                     ),
@@ -550,7 +567,7 @@ class _NewsCard extends StatelessWidget {
                 Text(
                   'Read',
                   style: TextStyle(
-                    fontSize: 16 / 2,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xFF304769),
                   ),
@@ -569,7 +586,7 @@ class _NewsCard extends StatelessWidget {
                 Text(
                   item.timeAgo,
                   style: TextStyle(
-                    fontSize: 16 / 2,
+                    fontSize: 13.sp,
                     color: const Color(0xFF4F526B),
                   ),
                 ),
